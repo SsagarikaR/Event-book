@@ -54,4 +54,19 @@ const router=Router();
     }
  })
 
+
+ router.delete("/:id",async(req:Request,res:Response):Promise<any>=>{
+    const {id}=req.params
+    try{
+        await sequelize.query('DELETE FROM Bookings WHERE BookingID=?',{
+            replacements:[id],
+            type:QueryTypes.SELECT
+        })
+        return res.status(200).json({message:"Successfully deleted this event"});
+    }
+    catch(error){
+        console.log(error,"error");
+        return res.status(500).json({error:"Please try again after sometimes!!"})
+    }
+ })
  export default router;

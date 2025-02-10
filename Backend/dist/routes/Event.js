@@ -14,7 +14,7 @@ const sequelize_1 = require("sequelize");
 const express_1 = require("express");
 const router = (0, express_1.Router)();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { EventName } = req.body;
+    const { EventName, date, location } = req.body;
     try {
         const user = yield databse_1.sequelize.query('SELECT * FROM Events WHERE CEventName=?  ', {
             replacements: [EventName],
@@ -23,8 +23,8 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (user.length > 0) {
             return res.status(409).json({ message: "This user is already registed" });
         }
-        const [result, metadata] = yield databse_1.sequelize.query('INSERT INTO Events (EventName) VALUES (?)', {
-            replacements: [EventName],
+        const [result, metadata] = yield databse_1.sequelize.query('INSERT INTO Events (EventName,date,location) VALUES (?,?,?)', {
+            replacements: [EventName, date, location],
             type: sequelize_1.QueryTypes.INSERT
         });
         console.log(result, metadata);

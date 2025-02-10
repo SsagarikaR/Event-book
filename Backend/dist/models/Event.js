@@ -13,6 +13,14 @@ exports.Event = databse_1.sequelize.define('Event', {
     EventName: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
+    },
+    date: {
+        type: sequelize_1.DataTypes.DATE,
+        allowNull: false
+    },
+    location: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     }
 }, {
     timestamps: false

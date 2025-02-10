@@ -5,7 +5,7 @@ import { Request,Response,Router } from "express";
 const router=Router();
 
  router.post("/",async(req:Request,res:Response):Promise<any>=>{
-    const {EventName}=req.body;
+    const {EventName,date,location}=req.body;
     try{
         const user=await sequelize.query('SELECT * FROM Events WHERE CEventName=?  ',
             {
@@ -16,9 +16,9 @@ const router=Router();
         if(user.length>0){
             return res.status(409).json({message:"This user is already registed"})
         }
-        const [result,metadata]=await sequelize.query('INSERT INTO Events (EventName) VALUES (?)',
+        const [result,metadata]=await sequelize.query('INSERT INTO Events (EventName,date,location) VALUES (?,?,?)',
             {
-                replacements:[EventName]
+                replacements:[EventName,date,location]
                 ,type:QueryTypes.INSERT
             }
         )
@@ -38,7 +38,7 @@ const router=Router();
 
  router.get("/all",async(req:Request,res:Response):Promise<any>=>{
     try{
-        const allEvent=sequelize.query('SELECT * FROM Events',
+        const allEvent=await sequelize.query('SELECT * FROM Events',
             {
                 type:QueryTypes.SELECT
             }
@@ -56,4 +56,22 @@ const router=Router();
     }
  })
 
+
+ router.get("/:name",async (req:Request,res:Response):Promise<any>=>{
+    const {name}=req.params
+    try{
+        const getByName=await sequelize.query('SELECT * FROM Events WHERE EventName=?',
+            {
+                replacements:[name],
+                type:QueryTypes.SELECT
+            }
+        )
+        return res.status(200).json(getByName)
+    }
+    catch(error){
+        console.log(error,"error");
+        return res.status(500).json({error:"Please try again after sometimes!!"})
+    }
+ })
+ 
  export default router;

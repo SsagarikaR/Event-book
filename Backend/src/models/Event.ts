@@ -14,6 +14,14 @@ export const Event=sequelize.define(
             type:DataTypes.STRING,
             allowNull:false
             
+        },
+        date:{
+            type:DataTypes.DATE,
+            allowNull:false
+        },
+        location:{
+            type:DataTypes.STRING,
+            allowNull:false
         }
     },
     {
