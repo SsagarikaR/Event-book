@@ -15,6 +15,9 @@ export const Event=sequelize.define(
             allowNull:false
             
         }
+    },
+    {
+        timestamps:false
     }
 )
 console.log(Event ===sequelize.models.Event);

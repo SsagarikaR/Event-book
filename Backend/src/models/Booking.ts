@@ -1,5 +1,5 @@
 import { sequelize} from "../config/databse";
-import { User } from "./User";
+import { Customer} from "./User";
 import { Event } from "./Event";
 import { Sequelize, DataTypes, Model } from "sequelize";
 
@@ -15,8 +15,8 @@ export const Booking=sequelize.define(
         BookedBy:{
             type:DataTypes.INTEGER,
             references:{
-                model:User,
-                key:'UserID'
+                model:Customer,
+                key:'CustomerID'
             }
         },
         EventID:{
@@ -26,6 +26,9 @@ export const Booking=sequelize.define(
                 key:'EventID'
             }
         }
+    },
+    {
+        timestamps:false
     }
 )
 console.log(Model ===sequelize.models.Model);

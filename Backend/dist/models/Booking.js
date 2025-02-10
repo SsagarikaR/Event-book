@@ -15,8 +15,8 @@ exports.Booking = databse_1.sequelize.define('Booking', {
     BookedBy: {
         type: sequelize_1.DataTypes.INTEGER,
         references: {
-            model: User_1.User,
-            key: 'UserID'
+            model: User_1.Customer,
+            key: 'CustomerID'
         }
     },
     EventID: {
@@ -26,5 +26,7 @@ exports.Booking = databse_1.sequelize.define('Booking', {
             key: 'EventID'
         }
     }
+}, {
+    timestamps: false
 });
 console.log(sequelize_1.Model === databse_1.sequelize.models.Model);

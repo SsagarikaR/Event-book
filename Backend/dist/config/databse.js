@@ -16,7 +16,7 @@ catch (error) {
 // (async()=>{
 //  console.log( await sequelize.sync({alter:true}));
 // })();
-exports.sequelize.sync().then((data) => {
+exports.sequelize.sync({ force: true }).then((data) => {
     console.log("database synced successfully");
     // console.log(data);
 }).catch((error) => {

@@ -14,5 +14,7 @@ exports.Event = databse_1.sequelize.define('Event', {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false
 });
 console.log(exports.Event === databse_1.sequelize.models.Event);

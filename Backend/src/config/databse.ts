@@ -15,7 +15,7 @@ try {
 //  console.log( await sequelize.sync({alter:true}));
 // })();
   
-sequelize.sync().then((data) => {
+sequelize.sync({force:true}).then((data) => {
   console.log("database synced successfully");
   // console.log(data);
 }).catch((error)=>{

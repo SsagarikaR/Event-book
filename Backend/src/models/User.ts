@@ -1,28 +1,32 @@
 import { Sequelize,DataTypes } from "sequelize";
 import { sequelize } from "../config/databse";
 
-export const User=sequelize.define(
-    'User',
+export const Customer=sequelize.define(
+    'Customer',
     {
-        UserID:{
+        CustomerID:{
             type:DataTypes.INTEGER,
             primaryKey:true,
             allowNull:false,
             autoIncrement:true
         },
-        UserName:{
+        CustomerName:{
             type:DataTypes.STRING,
             allowNull:false
             
         },
-        UserEmail:{
+        CustomerEmail:{
             type:DataTypes.STRING,
             allowNull:false
         },
         Password:{
             type:DataTypes.STRING,
             allowNull:false
-        }
+        },
+        
+    },
+    {
+        timestamps:false
     }
 )
-console.log(User ===sequelize.models.User);
+console.log(Customer ===sequelize.models.Customer);
