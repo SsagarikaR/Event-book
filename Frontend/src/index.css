@@ -9,5 +9,33 @@
    font-size: 1rem;
 }
 #root{
-  margin: auto;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signin-form{
+  background-color: aqua;
+  height: 28rem;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  row-gap: 1rem;
+}
+label{
+  width: 30%;
+  display: inline-block;
+}
+input{
+  padding: 1.2rem;
+}
+.input-container{
+  width: 100%;
+  padding-left: 2rem;
+}
+.submit{
+  padding: 0.5rem 3rem;
 }
