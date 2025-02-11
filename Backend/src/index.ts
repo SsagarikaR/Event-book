@@ -5,10 +5,11 @@ import bookingAPI from "./routes/booking"
 import bodyParser from "body-parser";
 import { Event } from "./models/Event";
 import { Booking } from "./models/Booking";
+import cors from "cors"
 const app: Application = express();
 const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
-
+app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

@@ -15,7 +15,7 @@ exports.Event = databse_1.sequelize.define('Event', {
         allowNull: false
     },
     date: {
-        type: sequelize_1.DataTypes.DATE,
+        type: sequelize_1.DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: sequelize_1.Sequelize.literal('CURRENT_TIMESTAMP')
     },

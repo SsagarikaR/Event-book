@@ -4,7 +4,7 @@ import { QueryTypes } from "sequelize";
 
 
 export async function createEvent(req:Request,res:Response) {
-    const {EventName,location}=req.body;
+    const {EventName,location,date}=req.body;
     try{
         const user=await sequelize.query('SELECT * FROM Events WHERE EventName=?  ',
             {
@@ -15,9 +15,9 @@ export async function createEvent(req:Request,res:Response) {
         if(user.length!==0){
             return res.status(409).json({message:"This event is already exist"})
         }
-        const [result,metadata]=await sequelize.query('INSERT INTO Events (EventName,location) VALUES (?,?)',
+        const [result,metadata]=await sequelize.query('INSERT INTO Events (EventName,location,date) VALUES (?,?,?)',
             {
-                replacements:[EventName,location]
+                replacements:[EventName,location,date]
                 ,type:QueryTypes.INSERT
             }
         )

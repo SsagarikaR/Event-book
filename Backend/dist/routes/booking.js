@@ -9,62 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const databse_1 = require("../config/databse");
-const sequelize_1 = require("sequelize");
 const express_1 = require("express");
+const BookingController_1 = require("../controllers/BookingController");
 const router = (0, express_1.Router)();
-router.post("/booking/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId } = req.params;
-    const { EventId } = req.body;
-    try {
-        const user = yield databse_1.sequelize.query('SELECT * FROM Bookings WHERE BookedBy=? AND EventId=? ', {
-            replacements: [userId, EventId],
-            type: sequelize_1.QueryTypes.SELECT
-        });
-        if (user.length > 0) {
-            return res.status(409).json({ message: "This event is already booked by you" });
-        }
-        const [result, metadata] = yield databse_1.sequelize.query('INSERT INTO Bookings (BookedBy,EventID) VALUES (?,?,?)', {
-            replacements: [userId, EventId],
-            type: sequelize_1.QueryTypes.INSERT
-        });
-        console.log(result, metadata);
-        if (metadata > 1) {
-            return res.status(202).json({ message: "You have successfully booked the event." });
-        }
-        else {
-            return res.status(403).json({ message: "error registering" });
-        }
-    }
-    catch (error) {
-        console.log(error, "error");
-        return res.status(500).json({ error: "Please try again after sometimes!!" });
-    }
+router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, BookingController_1.createBooking)(req, res);
 }));
-router.get("/all-booking", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const allBooking = databse_1.sequelize.query('SELECT * FROM Bookings ', {
-            type: sequelize_1.QueryTypes.SELECT
-        });
-        return res.status(200).json(allBooking);
-    }
-    catch (error) {
-        console.log(error, "error");
-        return res.status(500).json({ error: "Please try again after sometimes!!" });
-    }
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, BookingController_1.getAllBookingByEventName)(req, res);
 }));
-router.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    try {
-        yield databse_1.sequelize.query('DELETE FROM Bookings WHERE BookingID=?', {
-            replacements: [id],
-            type: sequelize_1.QueryTypes.SELECT
-        });
-        return res.status(200).json({ message: "Successfully deleted this event" });
-    }
-    catch (error) {
-        console.log(error, "error");
-        return res.status(500).json({ error: "Please try again after sometimes!!" });
-    }
+router.patch("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, BookingController_1.updateBooking)(req, res);
+}));
+router.delete("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, BookingController_1.deleteBooking)(req, res);
 }));
 exports.default = router;

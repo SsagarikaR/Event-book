@@ -18,7 +18,7 @@ const databse_1 = require("../config/databse");
 const sequelize_1 = require("sequelize");
 function createEvent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { EventName, location } = req.body;
+        const { EventName, location, date } = req.body;
         try {
             const user = yield databse_1.sequelize.query('SELECT * FROM Events WHERE EventName=?  ', {
                 replacements: [EventName],
@@ -27,8 +27,8 @@ function createEvent(req, res) {
             if (user.length !== 0) {
                 return res.status(409).json({ message: "This event is already exist" });
             }
-            const [result, metadata] = yield databse_1.sequelize.query('INSERT INTO Events (EventName,location) VALUES (?,?)', {
-                replacements: [EventName, location],
+            const [result, metadata] = yield databse_1.sequelize.query('INSERT INTO Events (EventName,location,date) VALUES (?,?,?)', {
+                replacements: [EventName, location, date],
                 type: sequelize_1.QueryTypes.INSERT
             });
             console.log(result, metadata);
