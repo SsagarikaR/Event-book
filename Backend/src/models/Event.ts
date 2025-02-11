@@ -17,7 +17,8 @@ export const Event=sequelize.define(
         },
         date:{
             type:DataTypes.DATE,
-            allowNull:false
+            allowNull:false,
+            defaultValue:Sequelize.literal('CURRENT_TIMESTAMP')
         },
         location:{
             type:DataTypes.STRING,

@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-export const sequelize=new Sequelize('olFoodDelivery','sagarika','Sagarika@%71',{
+export const sequelize=new Sequelize('eventManagemnet','sagarika','Sagarika@%71',{
     host: 'localhost',
     dialect: 'mysql',
 })
@@ -10,7 +10,7 @@ try {
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
-}
+  }
 // (async()=>{
 //  console.log( await sequelize.sync({alter:true}));
 // })();

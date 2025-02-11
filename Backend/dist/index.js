@@ -14,24 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 require("./config/databse");
-const auth_1 = __importDefault(require("./routes/auth"));
 const Event_1 = __importDefault(require("./routes/Event"));
 const booking_1 = __importDefault(require("./routes/booking"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const Event_2 = require("./models/Event");
-const User_1 = require("./models/User");
-const Booking_1 = require("./models/Booking");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.use(body_parser_1.default.json());
-//support parsing of application/x-www-form-urlencoded post data
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 () => __awaiter(void 0, void 0, void 0, function* () {
-    yield Event_2.Event.sync({ force: true });
-    yield User_1.Customer.sync({ force: true });
-    yield Booking_1.Booking.sync({ force: true });
+    // await Event.sync({alter:true});
+    // await Booking.sync({force:true});
 });
-app.use("/auth", auth_1.default);
 app.use("/events", Event_1.default);
 app.use("/bookings", booking_1.default);
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

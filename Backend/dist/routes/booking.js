@@ -53,4 +53,18 @@ router.get("/all-booking", (req, res) => __awaiter(void 0, void 0, void 0, funct
         return res.status(500).json({ error: "Please try again after sometimes!!" });
     }
 }));
+router.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        yield databse_1.sequelize.query('DELETE FROM Bookings WHERE BookingID=?', {
+            replacements: [id],
+            type: sequelize_1.QueryTypes.SELECT
+        });
+        return res.status(200).json({ message: "Successfully deleted this event" });
+    }
+    catch (error) {
+        console.log(error, "error");
+        return res.status(500).json({ error: "Please try again after sometimes!!" });
+    }
+}));
 exports.default = router;
