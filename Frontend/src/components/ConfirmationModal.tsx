@@ -1,4 +1,4 @@
-import React from 'react';
+import "../styles/modal.css";
 
 type ConfirmationModalProps = {
   isOpen: boolean;
@@ -8,7 +8,7 @@ type ConfirmationModalProps = {
 };
 
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, eventName }: ConfirmationModalProps) => {
-  if (!isOpen) return null; // Don't render the modal if it's not open
+  if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
