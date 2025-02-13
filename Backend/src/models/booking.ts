@@ -1,6 +1,6 @@
-import { sequelize} from "../config/databse";
-import { Event} from "./Event";
-import { Sequelize, DataTypes, Model } from "sequelize";
+import { sequelize} from "../db/databse";
+import { Event} from "./event";
+import { DataTypes, Model } from "sequelize";
 
 export const Booking=sequelize.define(
     'Booking',
@@ -19,7 +19,8 @@ export const Booking=sequelize.define(
             references:{
                 model:Event,
                 key:'EventID'
-            }
+            },
+            onDelete:'CASCADE'
         }
     },
     {

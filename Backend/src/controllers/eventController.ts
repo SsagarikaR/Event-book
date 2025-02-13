@@ -1,4 +1,4 @@
-import { sequelize } from "../config/databse";
+import { sequelize } from "../db/databse";
 import { Request,Response } from "express";
 import { QueryTypes } from "sequelize";
 
@@ -77,11 +77,12 @@ export async function getEventByName(req:Request,res:Response) {
 
 
 export async function updateEvent(req:Request,res:Response) {
-    const {eventID,location}=req.body
+    const {eventID,location,date,EventName}=req.body
+    console.log(req.body)
     try{
-        const deleteEvent=await sequelize.query('UPDATE Events set location=? WHERE EventID=?',
+        const deleteEvent=await sequelize.query('UPDATE Events set EventName=? , date=? ,location=? WHERE EventID=?',
             {
-                replacements:[location,eventID],
+                replacements:[EventName,date,location,eventID],
                 type:QueryTypes.DELETE
             }
         )
@@ -96,13 +97,12 @@ export async function updateEvent(req:Request,res:Response) {
 
 
 export async function deleteEvent(req:Request,res:Response){
+    console.log(req.body)
     const {eventID}=req.body
     try{
-        const deleteEvent=await sequelize.query('DELETE FROM Events WHERE EventID=:EventID',
+        const deleteEvent=await sequelize.query('DELETE FROM Events WHERE EventID=?',
             {
-                replacements:{
-                    EventID:eventID
-                },
+                replacements:[eventID],
                 type:QueryTypes.DELETE
             }
         )

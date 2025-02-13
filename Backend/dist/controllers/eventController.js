@@ -14,7 +14,7 @@ exports.getEvents = getEvents;
 exports.getEventByName = getEventByName;
 exports.updateEvent = updateEvent;
 exports.deleteEvent = deleteEvent;
-const databse_1 = require("../config/databse");
+const databse_1 = require("../db/databse");
 const sequelize_1 = require("sequelize");
 function createEvent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {

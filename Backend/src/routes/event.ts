@@ -1,7 +1,5 @@
-import { sequelize } from "../config/databse";
-import { QueryTypes, Sequelize } from "sequelize";
 import { Request,Response,Router } from "express";
-import { createEvent, deleteEvent, getEventByName, getEvents, updateEvent } from "../controllers/EventController";
+import { createEvent, deleteEvent, getEventByName, getEvents, updateEvent } from "../controllers/eventController";
 
 const router=Router();
 

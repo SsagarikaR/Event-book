@@ -1,4 +1,4 @@
-import { sequelize } from "../config/databse";
+import { sequelize } from "../db/databse";
 import { Request,Response } from "express";
 import { QueryTypes } from "sequelize";
 
@@ -14,7 +14,7 @@ export async function createBooking(req:Request,res:Response) {
             if(user.length>0){
                 return res.status(409).json({message:"This event is already booked by you"})
             }
-            const [result,metadata]=await sequelize.query('INSERT INTO Bookings (BookedBy,EventID) VALUES (?,?,?)',
+            const [result,metadata]=await sequelize.query('INSERT INTO Bookings (BookedBy,EventID) VALUES (?,?)',
                 {
                     replacements:[userId,EventId]
                     ,type:QueryTypes.INSERT
@@ -50,39 +50,4 @@ export async function  getAllBookingByEventName(req:Request,res:Response) {
             console.log(error,"error");
             return res.status(500).json({error:"Please try again after sometimes!!"})
         }
-}
-
-
-export async function  updateBooking(req:Request,res:Response) {
-      const {eventID,bookingID}=req.body
-        try{
-            const updateBooking=await sequelize.query('UPDATE Bookings SET EventID=? WHERE BookingID=?',
-                {
-                    replacements:[eventID,bookingID],
-                    type:QueryTypes.UPDATE
-                }
-            )
-            return res.status(200).json({message:"Updated Booking successfully"});
-        }
-        catch(error){
-            console.log(error,"error")
-            return res.status(500).json({error:"Please try again after sometimes!!"})
-        }
-}
-
-
-
-export async function  deleteBooking(req:Request,res:Response) {
-    const {bookingID}=req.body
-    try{
-        await sequelize.query('DELETE FROM Bookings WHERE BookingID=?',{
-            replacements:[bookingID],
-            type:QueryTypes.DELETE
-        })
-        return res.status(200).json({message:"Successfully deleted this event"});
-    }
-    catch(error){
-        console.log(error,"error");
-        return res.status(500).json({error:"Please try again after sometimes!!"})
-    }
 }

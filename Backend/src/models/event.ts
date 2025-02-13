@@ -1,5 +1,5 @@
-import { Sequelize,DataTypes } from "sequelize";
-import { sequelize } from "../config/databse";
+import { DataTypes } from "sequelize";
+import { sequelize } from "../db/databse";
 
 export const Event=sequelize.define(
     'Event',
@@ -17,8 +17,7 @@ export const Event=sequelize.define(
         },
         date:{
             type:DataTypes.DATEONLY,
-            allowNull:false,
-            defaultValue:Sequelize.literal('CURRENT_TIMESTAMP')
+            allowNull:false
         },
         location:{
             type:DataTypes.STRING,

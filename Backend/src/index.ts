@@ -1,10 +1,10 @@
 import express,{Request,Response,Application, urlencoded} from "express";
-import "./config/databse"
-import eventAPI from "./routes/Event"
+import "./db/databse"
+import eventAPI from "./routes/event"
 import bookingAPI from "./routes/booking"
 import bodyParser from "body-parser";
-import { Event } from "./models/Event";
-import { Booking } from "./models/Booking";
+import { Event } from "./models/event";
+import { Booking } from "./models/booking";
 import cors from "cors"
 const app: Application = express();
 const port = process.env.PORT || 3000;
@@ -14,8 +14,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 async()=>{
-    // await Event.sync({alter:true});
-    // await Booking.sync({force:true});
+    await Event.sync({alter:true});
+    await Booking.sync({alter:true});
 }
 
 app.use("/events",eventAPI);

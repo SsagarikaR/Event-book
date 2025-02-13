@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createBooking = createBooking;
 exports.getAllBookingByEventName = getAllBookingByEventName;
-const databse_1 = require("../config/databse");
+const databse_1 = require("../db/databse");
 const sequelize_1 = require("sequelize");
 function createBooking(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -24,7 +24,7 @@ function createBooking(req, res) {
             if (user.length > 0) {
                 return res.status(409).json({ message: "This event is already booked by you" });
             }
-            const [result, metadata] = yield databse_1.sequelize.query('INSERT INTO Bookings (BookedBy,EventID) VALUES (?,?,?)', {
+            const [result, metadata] = yield databse_1.sequelize.query('INSERT INTO Bookings (BookedBy,EventID) VALUES (?,?)', {
                 replacements: [userId, EventId],
                 type: sequelize_1.QueryTypes.INSERT
             });
