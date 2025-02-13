@@ -17,18 +17,12 @@ require("./db/databse");
 const event_1 = __importDefault(require("./routes/event"));
 const booking_1 = __importDefault(require("./routes/booking"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const event_2 = require("./models/event");
-const booking_2 = require("./models/booking");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-() => __awaiter(void 0, void 0, void 0, function* () {
-    yield event_2.Event.sync({ alter: true });
-    yield booking_2.Booking.sync({ alter: true });
-});
 app.use("/events", event_1.default);
 app.use("/bookings", booking_1.default);
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

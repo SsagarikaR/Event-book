@@ -12,7 +12,7 @@ export async function createBooking(req:Request,res:Response) {
                 }
             )
             if(user.length>0){
-                return res.status(409).json({message:"This event is already booked by you"})
+                return res.status(403).json({message:"This event is already booked by you"})
             }
             const [result,metadata]=await sequelize.query('INSERT INTO Bookings (BookedBy,EventID) VALUES (?,?)',
                 {
@@ -21,12 +21,7 @@ export async function createBooking(req:Request,res:Response) {
                 }
             )
             console.log(result,metadata)
-            if(metadata===1){
-                return res.status(202).json({message:"You have successfully booked the event."})
-            }
-            else{
-                return res.status(403).json({message:"error registering"})
-            }
+            return res.status(202).json({message:"You have successfully booked the event."})
         }
         catch(error){
             console.log(error,"error");
@@ -37,13 +32,14 @@ export async function createBooking(req:Request,res:Response) {
 
 export async function  getAllBookingByEventName(req:Request,res:Response) {
      try{
-            const allBooking=sequelize.query(`SELECT Bookings.BookingID, Bookings.BookedBy, Events.EventName 
+            const allBooking=await sequelize.query(`SELECT Bookings.BookingID, Bookings.BookedBy, Events.EventName 
             FROM Bookings 
             JOIN Events ON Bookings.EventID = Events.EventID`,
             {
                 type: QueryTypes.SELECT
             }
             );
+            console.log(allBooking)
             return res.status(200).json(allBooking);
         }
         catch(error){

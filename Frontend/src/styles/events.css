@@ -1,0 +1,23 @@
+.event{
+   box-shadow: 0 0 10px 2px;
+   padding: 1rem;
+}
+.action-icon{
+    width: 40px;
+    margin: 5px;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .action-icon:hover{
+    box-shadow: 0 0 2px 2px;
+  }
+  .btn{
+    padding: 0.5rem 1rem;
+    margin: 0.4rem;
+    cursor: pointer;
+  }
+  .no-data{
+    text-align: center;
+    width: 100%;
+    padding-left: 1rem;
+  }

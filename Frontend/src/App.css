@@ -1,0 +1,35 @@
+.container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5rem;
+    
+  }
+  
+  label{
+    width: 30%;
+    display: inline-block;
+  }
+  input{
+    padding: 1.2rem;
+  }
+  .input-container{
+    width: 100%;
+    padding-left: 2rem;
+  }
+  .submit{
+    padding: 0.5rem 3rem;
+  }
+  tr,th,td{
+    border: 1px solid;
+  }
+  td,th{
+    padding: 1rem;
+  }
+  table{
+    border-collapse: collapse;
+    margin: 1rem;
+  }
+  
